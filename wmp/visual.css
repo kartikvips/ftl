@@ -19,9 +19,9 @@ body {
 .header {
     display: flex; 
     justify-content: space-between;
-    height: 30px;
-    /* background: black; */
-    background: linear-gradient(#070708, #5C647D);
+    height: 40px;
+    background: black;
+    /* background: linear-gradient(#070708, #5C647D); */
     border-radius: 10px 10px 0 0;
 }
 
@@ -76,7 +76,7 @@ body {
 .mp3-player {
     display: flex;
     justify-content: space-evenly;
-    height: calc(100% - 80px);
+    height: calc(100% - 95px);
 }
 
 #analyser-render {
