@@ -1,24 +1,22 @@
-## FTL - faster than light
+## Media Player 
 
 ### Background and Overview
 
-FTL is a 2d vanilla javascript game based on flappy bird that allows players to traverse obstacles to get to the finish line.
+Media player is based off of Windows Media Player from 2000. It will have custom audio visualizations based on the song frequency/amplitudes. 
 
-Users can use the direction keys to move the object through the obstacle course and play multiple levels while collecting coins.
+Users can select songs from a short playlist, play, pause, scroll through, stop, and change the volume on the song. 
 
 ### Functionality & MVP  
 
-In FTL, users will be able to:
+In Media Player, users will be able to:
 
-- [ ] Use arrow keys to move the user object 
-- [ ] Hear background sound 
-- [ ] Traverse multiple levels
-- [ ] Collect coins to to increase score
-- [ ] Start, pause, restart, and reset the game
+- [ ] Pick from list of songs to play
+- [ ] Play a song
+- [ ] Pause a song
+- [ ] Scroll through song position
+- [ ] Stop a song
+- [ ] Change the volume on a song
 
-In addition, this project will include:
-
-- [ ] An About modal describing the basic functionality
 
 ### Wireframes
 
