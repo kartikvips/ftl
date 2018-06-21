@@ -14,6 +14,7 @@ body {
     height: 100%;
     /* background: #5C647D; */
     background: white;
+    position: relative;
 }
 
 .header {
@@ -22,7 +23,15 @@ body {
     height: 40px;
     background: black;
     /* background: linear-gradient(#070708, #5C647D); */
-    border-radius: 10px 10px 0 0;
+    /* border-radius: 10px 10px 0 0; */
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+}
+
+.header:hover{
+    /* display:none; */
 }
 
 .wmp-logo {
@@ -76,21 +85,15 @@ body {
 .mp3-player {
     display: flex;
     justify-content: space-evenly;
-    height: calc(100% - 95px);
+    height: 100%;
+    width: 100%;
 }
 
 #analyser-render {
-    width: 100%;
+    /* width: 100%; */
     /* height: calc(100% - 50px); */
-    height: 100%;
-    background: black;
+    /* height: 100%; */
+    /* background:#554477; */
+    background:black;
 }
 
-#audio-box {
-    background: #EEF3F9;
-}
-
-#audio-box audio {
-    width: 100%;
-    height: 50px;
-}
