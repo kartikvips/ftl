@@ -1,5 +1,5 @@
 
-let songs = ["song1.mp3", "song2.mp3"];
+let songs = ["song2.mp3", "song2.mp3"];
 
 // let songTitle = document.getElementById('songTitle');
 let songSlider = document.getElementById('songSlider');
@@ -18,20 +18,48 @@ let canvas, ctx, source, context, analyser, fbc_array, bars, bar_x, bar_width, b
 window.onload = () => { 
     loadSong();
     initMp3Player();
+    window.addEventListener('drop', onDrop, false);
+    window.addEventListener('dragover', onDrag, false);
 };
 
 document.body.onkeyup = function (e) {
     if (e.keyCode == 32) {
         playOrPause();
     }
-}
+};
 
-function loadSong() {
-    // debugger;
-    song.src = songs[currentSong];
-    // songTitle.textContent = songs[currentSong];
-    song.volume = volumeSlider.value;
-    setTimeout(showDuration, 1000);
+function onDrag(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    // $('#notification').velocity('fadeOut', {
+    //     duration: 150
+    // });
+    return false;
+    }
+
+function onDrop(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    var droppedFiles = e.dataTransfer.files;
+    loadSong(droppedFiles[0]); // initiates audio from the dropped file
+    }
+
+function loadSong(input = null) {
+        // debugger;
+    if(input){
+        songs.push(URL.createObjectURL(input));
+        currentSong = songs.length - 1;
+        song.src = songs[currentSong];
+        // songTitle.textContent = songs[currentSong];
+        song.volume = volumeSlider.value;
+        setTimeout(showDuration, 1000);
+        playOrPause();
+    } else {
+        song.src = songs[currentSong];
+        // songTitle.textContent = songs[currentSong];
+        song.volume = volumeSlider.value;
+        setTimeout(showDuration, 1000);
+    }
 }
 
 setInterval(updateSongSlider, 1000);
@@ -158,7 +186,7 @@ function frameLooper() {
     bars = 1000;
     let centerX = canvas.width / 2;
     let centerY = canvas.height / 2;
-    console.log(fbc_array);
+    // console.log(fbc_array);
     // ctx.lineWidth =0.1;
     // ctx.beginPath();
     // ctx.moveTo(centerX, centerY);
