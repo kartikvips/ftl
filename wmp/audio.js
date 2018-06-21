@@ -20,6 +20,12 @@ window.onload = () => {
     initMp3Player();
     window.addEventListener('drop', onDrop, false);
     window.addEventListener('dragover', onDrag, false);
+    window.addEventListener('resize', resizeCanvas, false);
+    song.addEventListener('ended', function () {
+        //play next song
+        next();
+    });
+
 };
 
 document.body.onkeyup = function (e) {
@@ -27,6 +33,11 @@ document.body.onkeyup = function (e) {
         playOrPause();
     }
 };
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
 
 function onDrag(e) {
     e.stopPropagation();
@@ -197,12 +208,13 @@ function frameLooper() {
     for (var i = 0; i < bars; i++) {
         let angle = 0.1 * i;
         let x = (1 + angle) * Math.cos(angle) * 5 + centerX;
-        let y = (1 + angle) * Math.sin(angle) *5 + centerY;
+        let y = (1 + angle) * Math.sin(angle) * 5 + centerY;
  
         bar_width = canvas.width/bars;
         bar_x = i * 2;
         bar_height = -(fbc_array[i] / 2.5);
         let circleR = (fbc_array[i] / 20);
+        //was 20
      
         // ctx.stroke();
         // ctx.fillRect(bar_x, canvas.height, bar_width, bar_height);
