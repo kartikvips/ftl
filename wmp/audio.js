@@ -1,5 +1,5 @@
 
-let songs = ["song2.mp3", "song2.mp3"];
+let songs = ["song1.mp3", "song2.mp3"];
 
 // let songTitle = document.getElementById('songTitle');
 let songSlider = document.getElementById('songSlider');
@@ -12,6 +12,8 @@ let currentSong = 0;
 let audioBox = document.getElementById('audio-box');
 let playButton = document.getElementById('playButton');
 let header = document.getElementById('header');
+let dragDrop = document.getElementById('dragDrop');
+let playlist = document.getElementById('playlist');
 
 let canvas, ctx, source, context, analyser, fbc_array, bars, bar_x, bar_width, bar_height;
 
@@ -25,6 +27,7 @@ window.onload = () => {
         //play next song
         next();
     });
+    generatePlaylist();
 
 };
 
@@ -53,6 +56,7 @@ function onDrop(e) {
     e.preventDefault();
     var droppedFiles = e.dataTransfer.files;
     loadSong(droppedFiles[0]); // initiates audio from the dropped file
+    generatePlaylist();
     }
 
 function loadSong(input = null) {
@@ -82,6 +86,26 @@ function updateSongSlider() {
 
 }
 
+function generatePlaylist() {
+    playlist.innerHTML = "";
+    for (let i = 0; i < songs.length; i++) {
+        let iterSong = new Audio(songs[i]);
+
+        // songs[i];
+        let ul = document.createElement('ul');
+        let songName = document.createElement('li');
+        let timer = document.createElement('li');
+        songName.appendChild(document.createTextNode(`Track ${i+1}`));
+        // debugger;
+        timer.appendChild(document.createTextNode(convertTime(Math.floor(iterSong.duration))));
+        debugger;
+        ul.appendChild(songName);
+        ul.appendChild(timer);
+        ul.className='nameSong';
+        playlist.appendChild(ul);
+    }
+}
+
 function convertTime (secs) {
     let min = Math.floor(secs/60);
     let sec = secs % 60;
@@ -94,6 +118,7 @@ function showDuration() {
     let d = Math.floor(song.duration);
     songSlider.setAttribute('max', d);
     duration.textContent = convertTime(d);
+    generatePlaylist();
 }
 
 function playOrPause(){
@@ -101,7 +126,7 @@ function playOrPause(){
         // debugger;
         song.play();
         playButton.className = "fas fa-pause";
-        audioBox.style.visibility = "hidden";
+        hide();
         // canvas.style.opacity = '1';
         // header.style.visibility = "hidden";
         // debugger;
@@ -109,18 +134,29 @@ function playOrPause(){
         song.pause();
         // canvas.style.opacity = '0.5';
         playButton.className = "fas fa-play-circle";
-        audioBox.style.visibility = "visible";
+        reveal();
         // header.style.visibility = "visible";
         // audioBox.style.display = "flex";
     }
 }
+
+function hide(){
+    audioBox.style.visibility = "hidden";
+    dragDrop.style.visibility = "hidden";
+}
+
+function reveal(){
+    audioBox.style.visibility = "visible";
+    dragDrop.style.visibility = "visible";
+}
+
 
 function playOrPauseSong() {
     if(song.paused){
         // debugger;
         song.play();
         playButton.className = "fas fa-pause";
-        audioBox.style.visibility = "hidden";
+        hide();
         // canvas.style.opacity = '1';
         // header.style.visibility = "hidden";
         // debugger;
@@ -128,7 +164,7 @@ function playOrPauseSong() {
         song.pause();
         //  canvas.style.opacity = '0.5';
         playButton.className = "fas fa-play-circle";
-        audioBox.style.visibility = "visible";
+        reveal();
         // header.style.visibility = "visible";
     }
 }
@@ -136,14 +172,15 @@ function playOrPauseSong() {
 function next(){
     currentSong = (currentSong + 1) % songs.length;
     loadSong();
-    audioBox.style.visibility = "hidden";
+    hide();
     song.play();
 }
+
 
 function previous(){
     currentSong = (currentSong - 1);
     currentSong = (currentSong < 0) ? songs.length - 1 : currentSong;
-    audioBox.style.visibility = "hidden";
+    hide();
     loadSong();
     // setTimeout(() => {song.play()}, 1000);
     song.play();
@@ -206,14 +243,15 @@ function frameLooper() {
 
 
     for (var i = 0; i < bars; i++) {
-        let angle = 0.1 * i;
+        // let angle = 0.1 * (1000-i);
+        let angle = 0.1 * (i);
         let x = (1 + angle) * Math.cos(angle) * 5 + centerX;
         let y = (1 + angle) * Math.sin(angle) * 5 + centerY;
  
         bar_width = canvas.width/bars;
         bar_x = i * 2;
         bar_height = -(fbc_array[i] / 2.5);
-        let circleR = (fbc_array[i] / 20);
+        let circleR = (fbc_array[i] / 17);
         //was 20
      
         // ctx.stroke();

@@ -20,12 +20,7 @@ function initMp3Player(){
     frameLooper();
 }
 
-window.addEventListener('resize', resizeCanvas, false);
 
-function resizeCanvas(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
 
 function frameLooper(){
     window.requestAnimationFrame(frameLooper);

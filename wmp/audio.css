@@ -18,6 +18,21 @@
     visibility: visible;
     /* display: none !important; */
 }
+.drag-drop{
+    width: 400px;
+    height: 150px;
+    color: white;
+    font-family: sans-serif;
+    position: absolute;
+    top: calc(50% - 75px);
+    left: calc(50% - 200px);
+    text-align: center;
+    /* background: black; */
+    opacity: 1.0;
+    border-radius: 10px;
+    visibility: visible;
+    /* display: none !important; */
+}
 
 .song-slider{
     width: 300px;
@@ -127,3 +142,27 @@
 .buttons * {
     margin: 0 5px;
 }
+
+.playlist-div{
+    position: absolute;
+    right: 0;
+    top: 40px;
+    color: white;
+    width: 200px;
+}
+
+.playlist{
+    padding: 0;
+    
+}
+
+.playlist > *{
+    list-style: none;
+    display: flex;
+    padding: none;
+    justify-content: space-between;
+}
+.nameSong{
+    padding: 0;
+}
+
