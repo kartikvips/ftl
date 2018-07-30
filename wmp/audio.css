@@ -160,9 +160,13 @@
     list-style: none;
     display: flex;
     padding: none;
-    justify-content: space-between;
+    justify-content: center;
 }
 .nameSong{
     padding: 0;
+}
+
+.nameSong:hover{
+    background: gray;
 }
 

@@ -1,5 +1,5 @@
 
-let songs = ["song1.mp3", "song2.mp3"];
+let songs = ["song1.mp3", "song3.mp3", "song4.mp3"];
 
 // let songTitle = document.getElementById('songTitle');
 let songSlider = document.getElementById('songSlider');
@@ -14,6 +14,8 @@ let playButton = document.getElementById('playButton');
 let header = document.getElementById('header');
 let dragDrop = document.getElementById('dragDrop');
 let playlist = document.getElementById('playlist');
+
+
 
 let canvas, ctx, source, context, analyser, fbc_array, bars, bar_x, bar_width, bar_height;
 
@@ -98,12 +100,21 @@ function generatePlaylist() {
         songName.appendChild(document.createTextNode(`Track ${i+1}`));
         // debugger;
         timer.appendChild(document.createTextNode(convertTime(Math.floor(iterSong.duration))));
-        debugger;
+        // debugger;
         ul.appendChild(songName);
-        ul.appendChild(timer);
+        // ul.appendChild(timer);
+        ul.addEventListener('click',() => playSong(i));
         ul.className='nameSong';
+        
         playlist.appendChild(ul);
     }
+}
+
+function playSong(idx){
+    currentSong = idx;
+    loadSong();
+    hide();
+    song.play();
 }
 
 function convertTime (secs) {
@@ -143,11 +154,16 @@ function playOrPause(){
 function hide(){
     audioBox.style.visibility = "hidden";
     dragDrop.style.visibility = "hidden";
+    playlist.style.visibility = "hidden";
+    header.style.visibility = "visible";
 }
 
 function reveal(){
     audioBox.style.visibility = "visible";
     dragDrop.style.visibility = "visible";
+    playlist.style.visibility = "visible";
+    header.style.visibility = "visible";
+
 }
 
 
@@ -195,12 +211,19 @@ function adjustVolume(){
     song.volume = volumeSlider.value;
 }
 
+let vol = 0;
+
 function mute(){
+   
     if (song.volume === 0) {
+        song.volume = vol;
+        volumeSlider.value = vol;
+    } else {
+        vol = volumeSlider.value;
+        song.volume = 0;
+        volumeSlider.value = 0;
 
     }
-    song.volume = 0;
-    volumeSlider.value = 0;
 }
 
 function initMp3Player() {
@@ -267,4 +290,10 @@ function frameLooper() {
 
     // ctx.strokeStyle = `rgba(255, 0, 0)`;
     // ctx.stroke();
+}
+
+function fullScreen(){
+    hide();
+    document.body.webkitRequestFullScreen();
+    header.style.visibility = "hidden";
 }
